@@ -6,7 +6,17 @@ export default function ProtectedRoute({ children }) {
   const location = useLocation();
 
   const tokenFromStore = useAppSelector(selectToken);
-  const token = tokenFromStore || localStorage.getItem("token"); // geçici fallback
+
+  // Yeni persist yapısına uygun fallback:
+  let tokenFromStorage = null;
+  try {
+    const raw = localStorage.getItem("auth");
+    tokenFromStorage = raw ? JSON.parse(raw)?.token : null;
+  } catch {
+    tokenFromStorage = localStorage.getItem("token"); // çok eski geçici test için
+  }
+
+  const token = tokenFromStore || tokenFromStorage;
 
   if (!token) {
     return <Navigate to="/login" replace state={{ from: location }} />;
