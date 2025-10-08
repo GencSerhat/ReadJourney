@@ -1,0 +1,20 @@
+.wrapper {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background: #fff;
+}
+
+.container {
+  width: min(960px, 92%);
+  margin-inline: auto;
+  padding-block: 32px;
+}
+
+.footer {
+  padding: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280; /* nötr gri */
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
