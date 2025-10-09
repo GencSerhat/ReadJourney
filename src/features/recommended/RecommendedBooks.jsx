@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./RecommendedBooks.module.css";
 import Pagination from "../../components/Pagination/Pagination.jsx";
-import BookModal from "./BookModal.jsx"; // ← EKLE
+import BookModal from "./BookModal.jsx";
 
 export default function RecommendedBooks({
   items = [],

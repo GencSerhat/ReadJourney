@@ -1,16 +1,41 @@
+import { useState } from "react";
+import toast from "react-hot-toast";
 import Modal from "../../components/Modal/Modal.jsx";
+import { addToLibraryApi } from "../../services/libraryApi.js";
 import styles from "./BookModal.module.css";
 
 export default function BookModal({ open, onClose, book }) {
+  const [isAdding, setIsAdding] = useState(false);
+  const [added, setAdded] = useState(false);
+
   if (!book) return null;
 
-  const { title, author, cover } = book;
+  const { id, title, author, cover } = book;
+  const onAdd = async () => { if (!id) return;
+    setIsAdding(true);
+    try {
+      await addToLibraryApi(book);
+      setAdded(true);
+      toast.success("Kitap kütüphanene eklendi!");
+      setTimeout(() => {
+        setAdded(false);
+        onClose?.();
+      }, 600);
+    } catch (err) {
 
-  const onAdd = () => {
-    // Sonraki adımda: backend'e "Add to library" isteği
-    // eslint-disable-next-line no-console
-    console.log("Add to library clicked:", book);
-    onClose?.();
+    const message = err?.normalizedMessage || err?.message || "Add to library failed";
+    // Zaten ekliyse hata yerine bilgi ver ve modalı kapa
+    const isDuplicate =
+      err?.status === 409 || /already/i.test(String(message));
+     if (isDuplicate) {
+      toast("Bu kitap zaten kütüphanende.", { icon: "ℹ️" });
+      onClose?.();
+     } else {
+       toast.error(message);
+     }
+    } finally {
+      setIsAdding(false);
+    }
   };
 
   return (
@@ -20,15 +45,23 @@ export default function BookModal({ open, onClose, book }) {
           className={styles.cover}
           src={cover || ""}
           alt={title}
-          onError={(e) => { e.currentTarget.style.background = "#e5e7eb"; e.currentTarget.removeAttribute("src"); }}
+          onError={(e) => {
+            e.currentTarget.style.background = "#e5e7eb";
+            e.currentTarget.removeAttribute("src");
+          }}
         />
         <div className={styles.meta}>
           <div className={styles.name}>{title}</div>
           <div className={styles.author}>{author}</div>
 
           <div className={styles.actions}>
-            <button type="button" className={styles.add} onClick={onAdd}>
-              Add to library
+            <button
+              type="button"
+              className={styles.add}
+              onClick={onAdd}
+              disabled={isAdding || added}
+            >
+              {added ? "Added ✓" : isAdding ? "Adding..." : "Add to library"}
             </button>
           </div>
         </div>

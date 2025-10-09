@@ -1,0 +1,15 @@
+.stack { display: grid; gap: 16px; }
+.subTitle { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+
+.form { display: grid; gap: 10px; }
+.input {
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.btn {
+  border: none; border-radius: 10px; padding: 12px 16px;
+  font-weight: 700; background: #2563eb; color: #fff; cursor: pointer; justify-self: start;
+}
+.note { color:#6b7280; font-size:14px; }
