@@ -1,0 +1,92 @@
+.wrapper {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.card {
+  width: min(420px, 92%);
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: grid;
+  gap: 14px;
+}
+
+.group {
+  display: grid;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  color: #374151;
+}
+
+.input {
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  font-size: 14px;
+}
+
+.input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+.error {
+  color: #dc2626;
+  font-size: 12px;
+  min-height: 14px;
+}
+
+.actions {
+  margin-top: 6px;
+  display: grid;
+  gap: 10px;
+}
+
+.submit {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #2563eb;  /* mavi CTA */
+  color: #fff;
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.alt {
+  text-align: center;
+  font-size: 14px;
+}
+
+.link {
+  color: #2563eb;
+  text-decoration: none;
+  margin-left: 6px;
+}

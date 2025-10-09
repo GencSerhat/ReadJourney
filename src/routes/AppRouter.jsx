@@ -3,6 +3,9 @@ import PublicLayout from "../layouts/PublicLayout.jsx";
 import MainLayout from "../layouts/MainLayout.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx"; // AppRouter ile aynı klasörde
 import NotFound from "../pages/NotFound/NotFound.jsx";
+import LoginPage from "../pages/Auth/LoginPage.jsx";
+import RegisterPage from "../pages/Auth/RegisterPage.jsx";
+import RecommendedPage from "../pages/Recommended/RecommendedPage.jsx";
 export default function AppRouter() {
   return (
     <BrowserRouter>
@@ -12,8 +15,8 @@ export default function AppRouter() {
 
         {/* PUBLIC */}
         <Route element={<PublicLayout />}>
-          <Route path="/login" element={<div>Login</div>} />
-          <Route path="/register" element={<div>Register</div>} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Route>
 
         {/* PRIVATE (Protected) */}
@@ -24,10 +27,7 @@ export default function AppRouter() {
             </ProtectedRoute>
           }
         >
-          <Route
-            path="/recommended"
-            element={<div>Recommended (Private)</div>}
-          />
+          <Route path="/recommended" element={<RecommendedPage />} />
           <Route path="/library" element={<div>My Library (Private)</div>} />
           <Route
             path="/reading/:bookId"

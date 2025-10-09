@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styles from "./MainLayout.module.css";
+import Header from "../features/header/Header";
 
 export default function MainLayout() {
   return (
@@ -7,9 +8,7 @@ export default function MainLayout() {
       <header className={styles.header}>
         <div className={styles.headerInner}>
           <div className={styles.logo}>Read Journey</div>
-
-          {/* Buraya sonra gerçek Header (UserNav, UserBar, Logout) gelecek */}
-          <nav>Header Placeholder</nav>
+          <Header />
         </div>
       </header>
 

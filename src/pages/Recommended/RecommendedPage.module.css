@@ -1,0 +1,73 @@
+.stack {
+  display: grid;
+  gap: 16px;
+}
+
+.subTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.filters {
+  display: grid;
+  gap: 12px;
+}
+
+.controls {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 480px) {
+  .controls {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.input {
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  font-size: 14px;
+}
+
+.input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-weight: 600;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+  justify-self: start;
+}
+
+.quote {
+  border-left: 4px solid #93c5fd;
+  background: #f0f9ff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-style: italic;
+}
+
+.asideText {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.linkBtn {
+  display: inline-block;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-decoration: none;
+  font-weight: 600;
+}

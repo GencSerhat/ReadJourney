@@ -22,7 +22,10 @@ export async function loginApi(payload) {
   const { data } = await http.post("/users/signin", payload);
   return data;
 }
-
+export async function getCurrentUserApi() {
+  const { data } = await http.get("/users/current");
+  return data;
+}
 /**
  * Logout
  * @returns {Promise<void>}
