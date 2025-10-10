@@ -1,12 +1,26 @@
 import styles from "./MyLibraryBooks.module.css";
-
+import { useState } from "react";
+import CoverImage from "../../components/CoverImage/CoverImage";
 /**
  * props:
  * - items
  * - onFilterChange?(status)
  * - onRemove?(bookId)
  */
-export default function MyLibraryBooks({ items = [], onFilterChange, onRemove }) {
+export default function MyLibraryBooks({
+  items = [],
+  onFilterChange,
+  onRemove,
+}) {
+  const [removingId, setRemovingId] = useState(null);
+  const handleRemove = async (item) => {
+    try {
+      setRemovingId(item.id);
+      await onRemove?.(item);
+    } finally {
+      setRemovingId(null);
+    }
+  };
   return (
     <section className={styles.section} aria-label="My library books">
       <h2 className={styles.title}>My books</h2>
@@ -32,27 +46,20 @@ export default function MyLibraryBooks({ items = [], onFilterChange, onRemove })
         <ul className={styles.grid}>
           {items.map((b) => (
             <li key={b.id} className={styles.card}>
-                {b.cover ? (
-                <img
-                  className={styles.cover}
-                 src={b.cover}
-                  alt={b.title}
-                 onError={(e) => {
-                   // kapak bozuksa img’yi kaldır – stil placeholder görevi görür
-                   e.currentTarget.replaceWith(Object.assign(document.createElement("div"), { className: styles.cover }));
-                 }}
-               />
-             ) : (
-               <div className={styles.cover} aria-label="No cover" />
-            )}
+              <CoverImage
+                src={b.cover}
+                title={b.title}
+                className={styles.cover}
+              />
               <div className={styles.name}>{b.title}</div>
               <div className={styles.author}>{b.author}</div>
               <button
                 type="button"
                 className={styles.btn}
-                onClick={() => onRemove?.(b.id)}
+                onClick={() => handleRemove(b)}
+                disabled={removingId === b.id}
               >
-                Remove
+                {removingId === b.id ? "Removing..." : "Remove"}
               </button>
             </li>
           ))}

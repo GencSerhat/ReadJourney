@@ -4,7 +4,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Dashboard from "../../features/dashboard/Dashboard.jsx";
 import MyLibraryBooks from "../../features/library/MyLibraryBooks.jsx";
 import { addBookSchema } from "../../features/library/validation.js";
-import { addOwnBookApi, fetchLibraryList, removeLibraryBook } from "../../services/libraryApi.js";
+import {
+  addOwnBookApi,
+  fetchLibraryList,
+  removeLibraryBook,
+} from "../../services/libraryApi.js";
 import Modal from "../../components/Modal/Modal.jsx";
 import styles from "./MyLibraryPage.module.css";
 import toast from "react-hot-toast";
@@ -31,8 +35,9 @@ export default function MyLibraryPage() {
   const load = async (st = status) => {
     setLoading(true);
     try {
-const list = await fetchLibraryList(st);
+      const list = await fetchLibraryList(st);
       setItems(list);
+      console.log("OWN RAW SAMPLE", list[0]);
     } catch (err) {
       const msg =
         err?.response?.data?.message ||
@@ -72,9 +77,9 @@ const list = await fetchLibraryList(st);
   };
 
   // Remove
-  const onRemove = async (bookId) => {
+  const onRemove = async (item) => {
     try {
-   await removeLibraryBook(bookId);
+      await removeLibraryBook(item);
       toast.success("Book removed");
       load(status); // tazele
     } catch (err) {
@@ -90,8 +95,9 @@ const list = await fetchLibraryList(st);
   const aside = (
     <div>
       <p className={styles.note}>
-        Buradan kendi kütüphanene kitap ekleyebilir ve mevcut kitaplarını yönetebilirsin.
-        Önerileri görmek için “Recommended” sayfasına geçebilirsin.
+        Buradan kendi kütüphanene kitap ekleyebilir ve mevcut kitaplarını
+        yönetebilirsin. Önerileri görmek için “Recommended” sayfasına
+        geçebilirsin.
       </p>
     </div>
   );
@@ -102,17 +108,50 @@ const list = await fetchLibraryList(st);
         {/* AddBook formu */}
         <section>
           <h2 className={styles.subTitle}>Add a book</h2>
-          <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
-            <input className={styles.input} type="text" placeholder="Title" {...register("title")} aria-invalid={Boolean(errors.title) || undefined} />
-            {errors.title?.message ? <span className={styles.note}>{errors.title.message}</span> : null}
+          <form
+            className={styles.form}
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Title"
+              {...register("title")}
+              aria-invalid={Boolean(errors.title) || undefined}
+            />
+            {errors.title?.message ? (
+              <span className={styles.note}>{errors.title.message}</span>
+            ) : null}
 
-            <input className={styles.input} type="text" placeholder="Author" {...register("author")} aria-invalid={Boolean(errors.author) || undefined} />
-            {errors.author?.message ? <span className={styles.note}>{errors.author.message}</span> : null}
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Author"
+              {...register("author")}
+              aria-invalid={Boolean(errors.author) || undefined}
+            />
+            {errors.author?.message ? (
+              <span className={styles.note}>{errors.author.message}</span>
+            ) : null}
 
-            <input className={styles.input} type="number" placeholder="Total pages" min={1} {...register("totalPages")} aria-invalid={Boolean(errors.totalPages) || undefined} />
-            {errors.totalPages?.message ? <span className={styles.note}>{errors.totalPages.message}</span> : null}
+            <input
+              className={styles.input}
+              type="number"
+              placeholder="Total pages"
+              min={1}
+              {...register("totalPages")}
+              aria-invalid={Boolean(errors.totalPages) || undefined}
+            />
+            {errors.totalPages?.message ? (
+              <span className={styles.note}>{errors.totalPages.message}</span>
+            ) : null}
 
-            <button className={styles.btn} type="submit" disabled={isSubmitting || (isSubmitted && !isValid)}>
+            <button
+              className={styles.btn}
+              type="submit"
+              disabled={isSubmitting || (isSubmitted && !isValid)}
+            >
               {isSubmitting ? "Adding..." : "Add book"}
             </button>
           </form>

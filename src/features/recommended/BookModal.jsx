@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import Modal from "../../components/Modal/Modal.jsx";
 import { addToLibraryApi } from "../../services/libraryApi.js";
 import styles from "./BookModal.module.css";
-
+import { rememberCover } from "../../utils/coverCache.js";
 export default function BookModal({ open, onClose, book }) {
   const [isAdding, setIsAdding] = useState(false);
   const [added, setAdded] = useState(false);
@@ -37,7 +37,13 @@ export default function BookModal({ open, onClose, book }) {
       setIsAdding(false);
     }
   };
-
+  // modal renderlandığında cache'e yaz
+  rememberCover({
+   id: book?.id,
+   title: book?.title,
+    author: book?.author,
+    cover: book?.cover,
+  });
   return (
     <Modal open={open} onClose={onClose} title="Book details">
       <div className={styles.wrap}>
