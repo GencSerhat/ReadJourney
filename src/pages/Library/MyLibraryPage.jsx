@@ -12,13 +12,20 @@ import {
 import Modal from "../../components/Modal/Modal.jsx";
 import styles from "./MyLibraryPage.module.css";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function MyLibraryPage() {
+  const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [status, setStatus] = useState(""); // filtre
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-
+const onStartReading = (item) => {
+   // Tercihen gerçek kitap ID’si; yoksa own kaydın id’si ile gidelim
+   const id = item?.bookId || item?.id;
+   if (!id) return;
+    navigate(`/reading/${id}`);
+  };
   // RHF
   const {
     register,
@@ -162,6 +169,7 @@ export default function MyLibraryPage() {
           items={loading ? [] : items}
           onFilterChange={setStatus}
           onRemove={onRemove}
+          onStartReading={onStartReading}
         />
       </div>
 

@@ -7,6 +7,7 @@ import LoginPage from "../pages/Auth/LoginPage.jsx";
 import RegisterPage from "../pages/Auth/RegisterPage.jsx";
 import RecommendedPage from "../pages/Recommended/RecommendedPage.jsx";
 import MyLibraryPage from "../pages/Library/MyLibraryPage.jsx";
+import ReadingPage from "../pages/Reading/ReadingPage.jsx";
 export default function AppRouter() {
   return (
     <BrowserRouter>
@@ -29,11 +30,8 @@ export default function AppRouter() {
           }
         >
           <Route path="/recommended" element={<RecommendedPage />} />
-            <Route path="/library" element={<MyLibraryPage />} />
-          <Route
-            path="/reading/:bookId"
-            element={<div>Reading (Private)</div>}
-          />
+          <Route path="/library" element={<MyLibraryPage />} />
+          <Route Route path="/reading/:bookId" element={<ReadingPage />} />
         </Route>
 
         {/* NOT FOUND */}
