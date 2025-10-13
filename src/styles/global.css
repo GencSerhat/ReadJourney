@@ -1,0 +1,70 @@
+@import "./_reset.css";
+@import "./_token.css"
+
+/* Fonts: istersen burada Google Fonts linkini de ekleyebilirsin.
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"> */
+
+html,
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-main);
+  font-size: var(--fs-md);
+}
+
+a {
+  color: var(--c-brand);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Global yardımcılar */
+.container {
+  width: min(100%, 1160px);
+  margin-inline: auto;
+  padding-inline: var(--sp-4);
+}
+
+.panel {
+  background: var(--c-panel);
+  border: 1px solid var(--c-border);
+  border-radius: var(--rad);
+  box-shadow: var(--shadow);
+}
+
+.title-xl {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  line-height: 1.1;
+}
+.title-lg {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+}
+.muted {
+  color: var(--c-muted);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: var(--rad);
+  padding: 10px 14px;
+  background: var(--c-brand);
+  color: #fff;
+  font-weight: 700;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--c-border);
+  color: var(--c-text);
+}

@@ -33,3 +33,22 @@
   margin-inline: auto;
   padding-block: 24px;
 }
+
+.wrap {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+.header {
+  border-bottom: 1px solid var(--c-border);
+  backdrop-filter: blur(6px);
+}
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.slot {
+  padding: var(--sp-6) 0;
+}

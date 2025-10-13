@@ -1,0 +1,30 @@
+:root {
+  /* Breakpoints */
+  --bp-mobile: 375px;   /* mobile full responsive */
+  --bp-tablet: 768px;
+  --bp-desktop: 1440px;
+
+  /* Typography */
+  --font-main: Inter, "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  --fs-2xl: clamp(28px, 4vw, 40px); /* başlık */
+  --fs-xl: 20px;
+  --fs-lg: 16px;
+  --fs-md: 14px;
+  --fs-sm: 12px;
+
+  /* Spacing & radius */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px;  --sp-4: 16px;  --sp-5: 20px;  --sp-6: 24px;  --sp-8: 32px;
+  --rad: 12px;  --rad-lg: 16px;  --shadow: 0 6px 20px rgba(0,0,0,.25);
+
+  /* Dark theme (Figma’ya yakın) */
+  --c-bg: #0d0f14;        /* ana arka plan */
+  --c-panel: #161a20;     /* kart/panel */
+  --c-muted: #9ca3af;     /* ikincil metin */
+  --c-text: #f5f7fb;      /* birincil metin */
+  --c-brand: #2563eb;     /* aksiyon */
+  --c-brand-2: #7c3aed;   /* ikincil vurgu */
+  --c-border: rgba(255,255,255,0.08);
+  --c-focus: #3b82f6;
+  --c-danger: #ef4444;
+  --c-success: #22c55e;
+}
