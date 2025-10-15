@@ -20,12 +20,13 @@ export default function MyLibraryPage() {
   const [status, setStatus] = useState(""); // filtre
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-const onStartReading = (item) => {
-   // Tercihen gerçek kitap ID’si; yoksa own kaydın id’si ile gidelim
-   const id = item?.bookId || item?.id;
-   if (!id) return;
+
+  const onStartReading = (item) => {
+    const id = item?.bookId || item?.id;
+    if (!id) return;
     navigate(`/reading/${id}`);
   };
+
   // RHF
   const {
     register,
@@ -58,7 +59,6 @@ const onStartReading = (item) => {
     }
   };
 
-  // ilk yükleme + filtre değişince
   useEffect(() => {
     load(status);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,7 +71,6 @@ const onStartReading = (item) => {
       setShowSuccess(true);
       toast.success("Book added to your library!");
       reset();
-      // Başarı modalını hemen kapatmadan önce listeyi tazele (anında yansısın)
       load(status);
     } catch (err) {
       const msg =
@@ -88,7 +87,7 @@ const onStartReading = (item) => {
     try {
       await removeLibraryBook(item);
       toast.success("Book removed");
-      load(status); // tazele
+      load(status);
     } catch (err) {
       const msg =
         err?.response?.data?.message ||
@@ -99,79 +98,84 @@ const onStartReading = (item) => {
     }
   };
 
+  // SOL PANEL (aside)
   const aside = (
-    <div>
-      <p className={styles.note}>
-        Buradan kendi kütüphanene kitap ekleyebilir ve mevcut kitaplarını
-        yönetebilirsin. Önerileri görmek için “Recommended” sayfasına
-        geçebilirsin.
-      </p>
+    <div className={styles.asideStack}>
+      {/* Create your library */}
+      <section className={styles.card}>
+        <h3 className={styles.cardTitle}>Create your library:</h3>
+
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="Book title"
+            {...register("title")}
+            aria-invalid={Boolean(errors.title) || undefined}
+          />
+          {errors.title?.message ? (
+            <span className={styles.note}>{errors.title.message}</span>
+          ) : null}
+
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="The author"
+            {...register("author")}
+            aria-invalid={Boolean(errors.author) || undefined}
+          />
+          {errors.author?.message ? (
+            <span className={styles.note}>{errors.author.message}</span>
+          ) : null}
+
+          <input
+            className={styles.input}
+            type="number"
+            min={1}
+            placeholder="Number of pages"
+            {...register("totalPages")}
+            aria-invalid={Boolean(errors.totalPages) || undefined}
+          />
+          {errors.totalPages?.message ? (
+            <span className={styles.note}>{errors.totalPages.message}</span>
+          ) : null}
+
+          <button
+            className={styles.btn}
+            type="submit"
+            disabled={isSubmitting || (isSubmitted && !isValid)}
+          >
+            {isSubmitting ? "Adding..." : "Add book"}
+          </button>
+        </form>
+      </section>
+
+      {/* Recommended books (placeholder kutu – elindeki componenti burada kullanabilirsin) */}
+      <section className={styles.card}>
+        <h3 className={styles.cardTitle}>Recommended books</h3>
+        <div className={styles.recoGrid}>
+          {/* Buraya küçük kapak kartları gelecektir. İstersen bir component bağla. */}
+          <div className={styles.recoSkeleton} />
+          <div className={styles.recoSkeleton} />
+          <div className={styles.recoSkeleton} />
+        </div>
+        <div className={styles.cardFooter}>
+          <span>Home</span>
+          <span aria-hidden="true">↗</span>
+        </div>
+      </section>
     </div>
   );
 
   return (
     <Dashboard title="My library" aside={aside}>
-      <div className={styles.stack}>
-        {/* AddBook formu */}
-        <section>
-          <h2 className={styles.subTitle}>Add a book</h2>
-          <form
-            className={styles.form}
-            onSubmit={handleSubmit(onSubmit)}
-            noValidate
-          >
-            <input
-              className={styles.input}
-              type="text"
-              placeholder="Title"
-              {...register("title")}
-              aria-invalid={Boolean(errors.title) || undefined}
-            />
-            {errors.title?.message ? (
-              <span className={styles.note}>{errors.title.message}</span>
-            ) : null}
-
-            <input
-              className={styles.input}
-              type="text"
-              placeholder="Author"
-              {...register("author")}
-              aria-invalid={Boolean(errors.author) || undefined}
-            />
-            {errors.author?.message ? (
-              <span className={styles.note}>{errors.author.message}</span>
-            ) : null}
-
-            <input
-              className={styles.input}
-              type="number"
-              placeholder="Total pages"
-              min={1}
-              {...register("totalPages")}
-              aria-invalid={Boolean(errors.totalPages) || undefined}
-            />
-            {errors.totalPages?.message ? (
-              <span className={styles.note}>{errors.totalPages.message}</span>
-            ) : null}
-
-            <button
-              className={styles.btn}
-              type="submit"
-              disabled={isSubmitting || (isSubmitted && !isValid)}
-            >
-              {isSubmitting ? "Adding..." : "Add book"}
-            </button>
-          </form>
-        </section>
-
-        {/* Liste */}
-        <MyLibraryBooks
-          items={loading ? [] : items}
-          onFilterChange={setStatus}
-          onRemove={onRemove}
-          onStartReading={onStartReading}
-        />
-      </div>
+      {/* SAĞ TARAF: liste ve filtreler */}
+      <MyLibraryBooks
+        items={loading ? [] : items}
+        onFilterChange={setStatus}
+        onRemove={onRemove}
+        onStartReading={onStartReading}
+      />
 
       {/* Başarı pop-up (Modal) */}
       <Modal open={showSuccess} onClose={() => setShowSuccess(false)} title="">

@@ -45,31 +45,47 @@ export default function MyLibraryBooks({
       </div>
 
       {items.length === 0 ? (
-        <div className={styles.empty}>Kütüphanende henüz kitap görünmüyor.</div>
+        <div className={styles.empty}>
+          <img src="/images/book.png" alt="book" />
+          <p>
+            To start training, add some of your books or from the recommended
+            ones
+          </p>
+        </div>
       ) : (
         <ul className={styles.grid}>
           {items.map((b) => (
             <li key={b.id} className={styles.card}>
-            <div onClick={() => setOpenItem(b)} style={{ cursor: "pointer" }}>
-               <CoverImage src={b.cover} title={b.title} className={styles.cover} />
-             </div>
+              <div onClick={() => setOpenItem(b)} style={{ cursor: "pointer" }}>
+                <CoverImage
+                  src={b.cover}
+                  title={b.title}
+                  className={styles.cover}
+                />
+              </div>
               <div className={styles.name}>{b.title}</div>
-              <div className={styles.author}>{b.author}</div>
-              <button
-                type="button"
-                className={styles.btn}
-                onClick={() => handleRemove(b)}
-                disabled={removingId === b.id}
-              >
-                {removingId === b.id ? "Removing..." : "Remove"}
-              </button>
+              <div className={styles.contentAndBtn}>
+                <div className={styles.author}>{b.author}</div>
+                <button
+                  type="button"
+                  className={styles.btn}
+                  onClick={() => handleRemove(b)}
+                  disabled={removingId === b.id}
+                >
+                  {removingId === b.id ? (
+                    "Removing..."
+                  ) : (
+                    <img src="/images/block.png" alt="remove" />
+                  )}
+                </button>
+              </div>
             </li>
           ))}
         </ul>
       )}
-          {/* Detay modalı */}
+      {/* Detay modalı */}
       <BookDetailModal
-       open={Boolean(openItem)}
+        open={Boolean(openItem)}
         onClose={() => setOpenItem(null)}
         book={openItem}
         onStart={(book) => {

@@ -9,7 +9,7 @@
 
 .dialog {
   width: min(560px, 92%);
-  background: #fff;
+ background: #1F1F1F;
   border-radius: 16px;
   border: 1px solid rgba(0,0,0,0.06);
   box-shadow: 0 12px 40px rgba(0,0,0,0.18);
@@ -32,7 +32,7 @@
 
 .close {
   border: 1px solid rgba(0,0,0,0.12);
-  background: #fff;
+  background: none;
   border-radius: 10px;
   padding: 8px 10px;
   line-height: 0;
