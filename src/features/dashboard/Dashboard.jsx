@@ -5,7 +5,7 @@ import styles from "./Dashboard.module.css";
  * props:
  * - title?: string | node
  * - actions?: ReactNode (title sağındaki buton/bağlantılar)
- * - aside?: ReactNode (sağ panel içeriği; verilmezse gizlenir)
+ * - aside?: ReactNode (SOL panel içeriği; verilmezse gizlenir)
  * - children: ana içerik (liste, formlar vb.)
  */
 export default function Dashboard({ title, actions, aside, children }) {
@@ -19,9 +19,11 @@ export default function Dashboard({ title, actions, aside, children }) {
       )}
 
       <div className={styles.grid}>
-        <div className={styles.content}>{children}</div>
-
+        {/* ASIDE solda */}
         {aside ? <aside className={styles.aside}>{aside}</aside> : null}
+
+        {/* İçerik sağda */}
+        <div className={styles.content}>{children}</div>
       </div>
 
       {/* İsteğe bağlı küçük notlar için:

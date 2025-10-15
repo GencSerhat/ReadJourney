@@ -2,14 +2,13 @@
   min-height: 100dvh;
   display: grid;
   grid-template-rows: auto 1fr;
-  background: #f8fafc; /* çok açık gri arka plan */
+
 }
 
 .header {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: #ffffff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 

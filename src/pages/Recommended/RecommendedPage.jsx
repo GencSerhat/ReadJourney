@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Dashboard from "../../features/dashboard/Dashboard.jsx";
@@ -18,28 +18,14 @@ export default function RecommendedPage() {
   const [errMsg, setErrMsg] = useState("");
 
   // Filters form
-  const { register, handleSubmit, watch, reset } = useForm({
+  const { register, handleSubmit, watch } = useForm({
     defaultValues: { title: "", author: "" },
     mode: "onTouched",
   });
 
-  // Watch values to keep UI in sync (isteğe bağlı)
+  // Watch values
   const titleVal = watch("title");
   const authorVal = watch("author");
-
-  // Aside
-  const aside = useMemo(
-    () => (
-      <div>
-        <p className={styles.asideText}>
-          Bu bölüm, sana önerilen kitaplar arasında hızlıca arama/filtre yapmana yardımcı olur.
-          Kendi kütüphaneni yönetmek için My library sayfasına geçebilirsin.
-        </p>
-        <Link className={styles.linkBtn} to="/library">Go to My library</Link>
-      </div>
-    ),
-    []
-  );
 
   // Fetch helper
   const load = async ({ pageArg = page } = {}) => {
@@ -55,7 +41,9 @@ export default function RecommendedPage() {
       setItems(items);
       setTotalPages(Math.max(1, totalPages || 1));
     } catch (err) {
-      setErrMsg(err?.normalizedMessage || err?.message || "Failed to load recommendations");
+      setErrMsg(
+        err?.normalizedMessage || err?.message || "Failed to load recommendations"
+      );
       setItems([]);
       setTotalPages(1);
     } finally {
@@ -75,54 +63,94 @@ export default function RecommendedPage() {
     await load({ pageArg: 1 });
   };
 
+  // ----- ASIDE (sol panel) -----
+  const aside = (
+    <aside className={styles.aside}>
+      {/* Filters card */}
+      <section className={styles.card}>
+        <h3 className={styles.cardTitle}>Filters:</h3>
+
+        <form className={styles.filters} onSubmit={handleSubmit(onApply)} noValidate>
+          <label className={styles.field}>
+            <span className={styles.label}>Book title:</span>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Enter text"
+              {...register("title")}
+            />
+          </label>
+
+          <label className={styles.field}>
+            <span className={styles.label}>The author:</span>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Enter text"
+              {...register("author")}
+            />
+          </label>
+
+          <button className={styles.applyBtn} type="submit" disabled={loading}>
+            {loading ? "Loading..." : "To apply"}
+          </button>
+        </form>
+      </section>
+
+      {/* Start your workout card (bilgilendirme) */}
+      <section className={styles.card}>
+        <h4 className={styles.workoutTitle}>Start your workout</h4>
+
+        <ol className={styles.steps}>
+          <li>
+            <span className={styles.stepNum}>1</span>
+            <span>
+              Create a personal <strong>library</strong>: add the books you intend to read to it.
+            </span>
+          </li>
+          <li>
+            <span className={styles.stepNum}>2</span>
+            <span>
+              Create your first <strong>workout</strong>: define a goal, choose a period, start training.
+            </span>
+          </li>
+        </ol>
+
+        <Link className={styles.libraryLink} to="/library">
+          My library →
+        </Link>
+      </section>
+
+      {/* Quote card */}
+      <section className={`${styles.card} ${styles.card2}`}>
+        <img src="/images/book.png" className={styles.bookImg}/>
+        <p className={styles.quoteText}>
+          <strong>“Books are windows</strong> to the world, and reading is a journey into the unknown.”
+        </p>
+      </section>
+    </aside>
+  );
+
+  // ----- MAIN (orta panel) -----
   return (
-    <Dashboard title="Recommended" aside={aside}>
-      <div className={styles.stack}>
-        {/* Filters form */}
-        <section>
-          <h2 className={styles.subTitle}>Find books</h2>
-          <form className={styles.filters} onSubmit={handleSubmit(onApply)} noValidate>
-            <div className={styles.controls}>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Search by title..."
-                {...register("title")}
-              />
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Search by author..."
-                {...register("author")}
-              />
-            </div>
-            <button className={styles.btn} type="submit" disabled={loading}>
-              {loading ? "Loading..." : "To apply"}
-            </button>
-          </form>
-        </section>
-
-        {/* Quote */}
-        <section className={styles.quote}>
-          “A room without books is like a body without a soul.” — Cicero
-        </section>
-
-        {/* Hata/Loading durumları */}
-        {errMsg ? (
-          <div className={styles.quote} style={{ borderLeftColor: "#fca5a5", background: "#fff1f2", fontStyle: "normal" }}>
-            {errMsg}
+   <div className={styles.screen}>   {/* <-- tam ekran koyu arka plan */}
+      <Dashboard title="Recommended" aside={aside}>
+        <div className={styles.mainPanel}>
+          <div className={styles.mainHeader}>
+            <h2 className={styles.heading}>Recommended</h2>
           </div>
-        ) : null}
 
-        {/* List + Pagination */}
-        <RecommendedBooks
-          items={loading ? [] : items}
-          page={page}
-          totalPages={totalPages}
-          onPrev={() => setPage((p) => Math.max(1, p - 1))}
-          onNext={() => setPage((p) => Math.min(totalPages, p + 1))}
-        />
-      </div>
-    </Dashboard>
+          {errMsg ? <div className={styles.errorBanner}>{errMsg}</div> : null}
+
+          <RecommendedBooks
+            items={loading ? [] : items}
+            page={page}
+            totalPages={totalPages}
+            onPrev={() => setPage((p) => Math.max(1, p - 1))}
+            onNext={() => setPage((p) => Math.min(totalPages, p + 1))}
+          />
+        </div>
+      </Dashboard>
+    </div>
   );
 }

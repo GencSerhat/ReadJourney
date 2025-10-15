@@ -8,12 +8,12 @@
 
 .btn {
   border: 1px solid rgba(0,0,0,0.12);
-  background: #fff;
-  border-radius: 10px;
+  border-radius: 100px;
   padding: 8px 12px;
   min-width: 44px;
   cursor: pointer;
   font-weight: 600;
+  align-items: center;
 }
 
 .btn:disabled {

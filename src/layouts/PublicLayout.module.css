@@ -2,7 +2,7 @@
   min-height: 100dvh;
   display: grid;
   grid-template-rows: 1fr auto;
-  background: #fff;
+  /* background: #fff; */
 }
 
 .container {
@@ -48,6 +48,6 @@
   height: 24px;
   opacity: 0.9;
 }
-.big {
+/* .big {
   composes: title-xl from global;
-}
+} */

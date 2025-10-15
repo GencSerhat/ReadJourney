@@ -1,73 +1,177 @@
-.stack {
+/* Tüm sayfa koyu zemin */
+.screen {
+  min-height: 100dvh; /* mobilde güvenli yükseklik */
+  background: #0f1115; /* sayfa arkası: tam koyu */
+  padding: 20px; /* ekran görüntüsündeki dış boşluk */
+  box-sizing: border-box;
+}
+/* SOL PANEL (ASIDE) */
+.aside {
   display: grid;
   gap: 16px;
 }
 
-.subTitle {
-  font-size: 18px;
+.card {
+  background: #15181f; /* koyu kart */
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 16px;
+  color: #e5e7eb;
+  box-shadow: inset 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+.card2{
+  display: flex;
+ 
+}
+.cardTitle {
+  font-size: 13px;
   font-weight: 700;
-  margin-bottom: 8px;
+  color: #cbd5e1;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
 }
 
+/* Filtre formu */
 .filters {
   display: grid;
   gap: 12px;
 }
 
-.controls {
+.field {
   display: grid;
-  gap: 12px;
+  gap: 6px;
 }
 
-@media (min-width: 480px) {
-  .controls {
-    grid-template-columns: 1fr 1fr;
-  }
+.label {
+  font-size: 12px;
+  color: #9aa3b2;
 }
 
 .input {
-  border: 1px solid rgba(0,0,0,0.12);
-  border-radius: 10px;
+  width: 100%;
+  background: #1b1f27;
+  color: #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   padding: 12px 14px;
-  outline: none;
   font-size: 14px;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
-
+.input::placeholder {
+  color: #8b8f99;
+}
 .input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+  border-color: #0b6bff;
+  box-shadow: 0 0 0 3px rgba(11, 107, 255, 0.18);
 }
 
-.btn {
+.applyBtn {
+  justify-self: start;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 12px 16px;
-  font-weight: 600;
-  background: #2563eb;
+  font-weight: 700;
+ background: none;
+ border-style: solid;
+ border-color: #F9F9F933;
   color: #fff;
   cursor: pointer;
-  justify-self: start;
+
 }
 
-.quote {
-  border-left: 4px solid #93c5fd;
-  background: #f0f9ff;
-  padding: 12px 14px;
-  border-radius: 10px;
-  font-style: italic;
+/* Workout kartı */
+.workoutTitle {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 10px;
 }
 
-.asideText {
-  color: #6b7280;
-  font-size: 14px;
-  margin-bottom: 12px;
+.steps {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
 }
-
-.linkBtn {
-  display: inline-block;
-  border: 1px solid rgba(0,0,0,0.12);
-  border-radius: 10px;
+.stepNum {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  background: white;
+  color:black;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  margin-right: 10px;
+}
+.libraryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: underline;
+  border-radius: 12px;
   padding: 10px 14px;
+  color:#686868;
   text-decoration: none;
-  font-weight: 600;
+}
+
+/* Alıntı kartı */
+.quoteText {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: #cbd5e1;
+}
+
+/* ORTA PANEL (ANA İÇERİK) */
+.mainPanel {
+  background: #15181f;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: inset 0 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+.mainHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.heading {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+/* Hata bandı */
+.errorBanner {
+  border-left: 4px solid #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+  color: #fecaca;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+/* Kullanmayı sürdürdüğünüz eski sınıflar için uyumluluk (gerekirse) */
+.asideText {
+  color: #9aa3b2;
+  font-size: 14px;
+}
+.linkBtn {
+  color: #e5e7eb;
+  text-decoration: none;
+}
+/* Recommended ekranında Dashboard dış kaplarını transparan yap */
+.screen
+  :where(.shell, .page, .container, .grid, .paper, .asideWrap, .mainWrap) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none; /* varsa beyaz çerçeveyi kapat */
 }

@@ -15,7 +15,15 @@ export default function RecommendedBooks({
 
   return (
     <section className={styles.section} aria-label="Recommended books">
-      <h2 className={styles.title}>Books</h2>
+      <div className={styles.recomHead}>
+        <h2 className={styles.title}>Books</h2>
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onPrev={onPrev}
+          onNext={onNext}
+        />
+      </div>
 
       {items.length === 0 ? (
         <div className={styles.empty}>
@@ -36,7 +44,9 @@ export default function RecommendedBooks({
                 }}
                 role="button"
                 tabIndex={0}
-                onKeyDown={(e) => { if (e.key === "Enter") setOpenId(b.id); }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") setOpenId(b.id);
+                }}
               />
               <div className={styles.name}>{b.title}</div>
               <div className={styles.author}>{b.author}</div>
@@ -44,8 +54,6 @@ export default function RecommendedBooks({
           ))}
         </ul>
       )}
-
-      <Pagination page={page} totalPages={totalPages} onPrev={onPrev} onNext={onNext} />
 
       {/* Modal */}
       <BookModal

@@ -1,8 +1,8 @@
-.shell {
+/* .shell {
   width: min(1200px, 92%);
   margin-inline: auto;
   padding-block: 24px;
-}
+} */
 
 .titleRow {
   display: flex;
@@ -23,27 +23,27 @@
   gap: 8px;
 }
 
+/* GRID: mobilde alt alta; >=1024px'de SOL aside, SAĞ içerik */
 .grid {
   display: grid;
   gap: 16px;
+  align-items: start;
 }
 
 @media (min-width: 1024px) {
   .grid {
-    grid-template-columns: 1fr 320px; /* içerik + sağ aside */
+    grid-template-columns: 320px 1fr; /* SOL: aside | SAĞ: content */
   }
 }
 
 .content {
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 16px;
   padding: 16px;
 }
 
 .aside {
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 16px;
   padding: 16px;
 }
@@ -51,4 +51,23 @@
 .muted {
   color: #6b7280;
   font-size: 14px;
+}
+
+/* Kabuğun kendisi */
+.shell,
+.page,
+.container,
+.grid,
+.paper {
+  background: transparent !important;
+  box-shadow: none !important;
+  /* Eğer beyaz border varsa kapat: */
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Sol kolon (aside) ve içerik kolonunun DIŞ kapları */
+.asideWrap,
+.mainWrap {
+  background: transparent !important;
+  box-shadow: none !important;
 }

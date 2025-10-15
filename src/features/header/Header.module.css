@@ -2,7 +2,6 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  background: #ffffff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
@@ -75,7 +74,7 @@
 
 .logout {
   border: 1px solid rgba(0,0,0,0.12);
-  background: #fff;
+  color: white;
   border-radius: 10px;
   padding: 8px 10px;
   font-weight: 600;
