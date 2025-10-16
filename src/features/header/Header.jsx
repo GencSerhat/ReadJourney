@@ -18,6 +18,11 @@ export default function Header() {
     user?.name || user?.username || user?.email?.split("@")[0] || "Account";
   const initials = (displayName?.[0] || "A").toUpperCase();
 
+  // Home için hangi route’u kullanacağınız:
+  // Eğer uygulamanın ana sayfası / ise HOME_PATH = "/"
+  // Recommended sayfasını ana sayfa kullanıyorsanız HOME_PATH = "/recommended"
+  const HOME_PATH = "/recommended"; // gerekirse "/" yapın
+
   const handleLogout = async () => {
     setIsLoggingOut(true);
     try {
@@ -27,7 +32,6 @@ export default function Header() {
       const msg = err?.normalizedMessage || err?.message || "Çıkış sırasında hata oluştu";
       toast.error(msg);
     } finally {
-      // client-side de-otorize
       dispatch(clearAuth());
       try {
         localStorage.removeItem("auth");
@@ -39,20 +43,16 @@ export default function Header() {
     }
   };
 
-  const openMenu = () => setIsMenuOpen(true);
-  const closeMenu = () => setIsMenuOpen(false);
   const toggleMenu = () => setIsMenuOpen((v) => !v);
+  const closeMenu = () => setIsMenuOpen(false);
 
-  // ESC ile kapat + body scroll kilidi
   useEffect(() => {
     if (!isMenuOpen) {
       document.body.style.overflow = "";
       return;
     }
     document.body.style.overflow = "hidden";
-    const onKey = (e) => {
-      if (e.key === "Escape") closeMenu();
-    };
+    const onKey = (e) => e.key === "Escape" && closeMenu();
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("keydown", onKey);
@@ -66,12 +66,12 @@ export default function Header() {
   return (
     <div className={styles.bar}>
       <div className={styles.inner}>
-        <div className={styles.logo}>Read Journey</div>
-
-        {/* Desktop nav */}
+        <div className={styles.logo}>READ JOURNEY</div>
+ <div className={styles.spacer} />
+        {/* Orta navigasyon */}
         <nav className={styles.nav} aria-label="User navigation">
-          <NavLink to="/recommended" className={navLinkClass}>
-            Recommended
+          <NavLink to={HOME_PATH} className={navLinkClass}>
+            Home
           </NavLink>
           <NavLink to="/library" className={navLinkClass}>
             My library
@@ -80,7 +80,7 @@ export default function Header() {
 
         <div className={styles.spacer} />
 
-        {/* Desktop user bar */}
+        {/* Kullanıcı barı */}
         <div className={styles.userBar} aria-label="User bar">
           <div className={styles.avatar} aria-hidden="true">{initials}</div>
           <span>{displayName}</span>
@@ -129,8 +129,8 @@ export default function Header() {
             </div>
 
             <nav className={styles.menuNav} aria-label="Mobile user navigation">
-              <NavLink to="/recommended" className={navLinkClass} onClick={closeMenu}>
-                Recommended
+              <NavLink to={HOME_PATH} className={navLinkClass} onClick={closeMenu}>
+                Home
               </NavLink>
               <NavLink to="/library" className={navLinkClass} onClick={closeMenu}>
                 My library
@@ -140,7 +140,6 @@ export default function Header() {
             <div className={styles.menuUser}>
               <div className={styles.avatar} aria-hidden="true">{initials}</div>
               <div style={{ flex: 1 }}>{displayName}</div>
-              {/* boşluk */}
             </div>
 
             <button

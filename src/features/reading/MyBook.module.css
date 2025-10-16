@@ -1,79 +1,130 @@
-.wrap {
-  display: grid;
-  gap: 14px;
+/* Düzen */
+.layout { display: grid; gap: 16px; }
+@media (min-width: 1024px) {
+  .layout { grid-template-columns: 320px 1fr; align-items: start; }
 }
 
-.banner {
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  background: #fff;
-  border-radius: 12px;
-  padding: 12px;
-  display: grid;
-  gap: 6px;
+/* Sol panel */
+.side { display: grid; gap: 16px; }
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 14px;
 }
-.head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.badge {
-  font-size: 12px;
-  font-weight: 800;
-  background: #e0f2fe;
-  color: #075985;
-  padding: 4px 8px;
-  border-radius: 999px;
-}
+.sideTitle { color:#cbd5e1; font-weight:700; margin-bottom:8px; }
 
-.form {
-  display: grid;
-  gap: 8px;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-}
+.form { display: grid; gap: 10px; }
 .input {
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  color: #e5e7eb;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
   padding: 10px 12px;
   font-size: 14px;
 }
-.btn {
+.input::placeholder { color: rgba(229,231,235,0.55); }
+
+.pillBtn {
+  justify-self: start;
   border: none;
-  border-radius: 10px;
-  padding: 10px 14px;
+  border-radius: 999px;
+  padding: 10px 16px;
   font-weight: 700;
   background: #2563eb;
   color: #fff;
   cursor: pointer;
 }
+.pillBtnStop { background: #ef4444; }
 
-.tabs {
-  display: flex;
-  gap: 8px;
+.sideRow { display:flex; align-items:center; justify-content:space-between; }
+.sideHeading { color:#e5e7eb; font-weight:800; }
+
+/* İkon switch */
+.iconBar { display: flex; gap: 6px; }
+.iconBtn {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #e5e7eb; cursor: pointer;
+  display: grid; place-items: center; font-size: 14px;
 }
-.tab {
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: #fff;
-  border-radius: 10px;
-  padding: 8px 12px;
-  font-weight: 700;
-  cursor: pointer;
+.iconActive { background: #111827; border-color: #111827; color: #fff; }
+
+/* Diary list */
+.diaryList { display: grid; gap: 10px; margin-top: 8px; }
+.diaryItem {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 10px; align-items: center;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 14px; padding: 10px;
 }
-.tab[aria-selected="true"] {
-  background: #111827;
-  color: #fff;
-  border-color: #111827;
+.diaryLeft { display: grid; gap: 2px; }
+.diaryDate { color:#e5e7eb; font-weight:700; font-size:13px; }
+.diaryStatBig { color:#e5e7eb; font-weight:800; }
+.diaryMinor { color:#9ca3af; font-size:12px; }
+
+.diaryGraphCol { display:grid; gap:6px; }
+.barWrap { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden; }
+.barFill { height: 100%; width: 0%; background: linear-gradient(90deg, #22c55e, #16a34a); }
+.spark { width: 72px; height: 20px; color: #22c55e; opacity: .9; }
+.speedRow { display:flex; gap:6px; color:#9ca3af; font-size:12px; }
+
+.trash {
+  background: transparent; border: 1px solid rgba(255,255,255,0.12);
+  color: #e5e7eb; border-radius: 10px; padding: 8px 10px; cursor: pointer;
 }
 
-.panel {
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  background: #fff;
-  border-radius: 12px;
-  padding: 12px;
-  min-height: 120px;
+/* Sağ sahne */
+.stage {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 20px; display: grid; justify-items: center;
+  text-align: center; gap: 12px; min-height: 420px;
+}
+.stageTitle { width:100%; text-align:left; color:#e5e7eb; font-size:22px; font-weight:800; }
+
+.coverWrap { width: 220px; }
+.cover {
+  width: 100%; aspect-ratio: 3/4; border-radius: 12px; object-fit: cover;
+  background: rgba(255,255,255,0.06); box-shadow: 0 8px 28px rgba(0,0,0,0.35);
 }
 
-.note {
-  color: #6b7280;
-  font-size: 14px;
+.bookTitle { color:#e5e7eb; font-weight:800; }
+.bookAuthor { color:#9ca3af; font-size:14px; }
+
+/* Kırmızı kayıt düğmesi */
+.recordBtn {
+  margin-top: 6px; width: 44px; height: 44px; border-radius: 50%;
+  background: #111827; border: 2px solid #e5e7eb;
+  display: grid; place-items: center; cursor: pointer;
+}
+.recordDot {
+  width: 18px; height: 18px; border-radius: 6px;
+  background: #ef4444; border: 3px solid #111827;
+}
+.recordActive .recordDot { box-shadow: 0 0 0 3px rgba(239,68,68,0.25); }
+
+.note { color:#9ca3af; font-size:14px; }
+
+/* Statistics */
+.statsWrap { display: grid; gap: 12px; }
+.donutBox { display: grid; place-items: center; }
+.donut { overflow: visible; }
+.donutTrack { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 12; }
+.donutFill {
+  fill: none; stroke: #22c55e; stroke-width: 12; stroke-linecap: round;
+  transform: rotate(-90deg); transform-origin: 50% 50%;
+}
+.donutText { fill: #e5e7eb; font-weight: 800; font-size: 18px; }
+.statsLines { display: grid; gap: 6px; }
+.statsLine { display: flex; gap: 8px; align-items: baseline; }
+
+/* Mobil */
+@media (max-width: 640px) {
+  .diaryItem { grid-template-columns: 1fr; }
+  .coverWrap { width: 180px; }
 }

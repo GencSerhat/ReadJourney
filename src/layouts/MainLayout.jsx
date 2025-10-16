@@ -7,7 +7,7 @@ export default function MainLayout() {
     <div className={styles.wrapper}>
       <header className={styles.header}>
         <div className={styles.headerInner}>
-          <div className={styles.logo}>Read Journey</div>
+          {/* <div className={styles.logo}>Read Journey</div> */}
           <Header />
         </div>
       </header>
