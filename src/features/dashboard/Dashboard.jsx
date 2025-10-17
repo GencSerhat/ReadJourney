@@ -1,13 +1,5 @@
 import styles from "./Dashboard.module.css";
 
-/**
- * Universal Dashboard shell
- * props:
- * - title?: string | node
- * - actions?: ReactNode (title sağındaki buton/bağlantılar)
- * - aside?: ReactNode (SOL panel içeriği; verilmezse gizlenir)
- * - children: ana içerik (liste, formlar vb.)
- */
 export default function Dashboard({ title, actions, aside, children }) {
   return (
     <section className={styles.shell} aria-label="Dashboard">
@@ -25,10 +17,6 @@ export default function Dashboard({ title, actions, aside, children }) {
         {/* İçerik sağda */}
         <div className={styles.content}>{children}</div>
       </div>
-
-      {/* İsteğe bağlı küçük notlar için:
-      <p className={styles.muted}>Helper text</p>
-      */}
     </section>
   );
 }

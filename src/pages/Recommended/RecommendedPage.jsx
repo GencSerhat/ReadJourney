@@ -51,13 +51,13 @@ export default function RecommendedPage() {
     }
   };
 
-  // İlk yükleme + sayfa değişince getir
+
   useEffect(() => {
     load({ pageArg: page });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  
   }, [page]);
 
-  // Form submit → sayfayı 1’e al ve getir
+  
   const onApply = async () => {
     setPage(1);
     await load({ pageArg: 1 });
@@ -97,7 +97,6 @@ export default function RecommendedPage() {
         </form>
       </section>
 
-      {/* Start your workout card (bilgilendirme) */}
       <section className={styles.card}>
         <h4 className={styles.workoutTitle}>Start your workout</h4>
 
@@ -133,7 +132,7 @@ export default function RecommendedPage() {
 
   // ----- MAIN (orta panel) -----
   return (
-   <div className={styles.screen}>   {/* <-- tam ekran koyu arka plan */}
+   <div className={styles.screen}>   
       <Dashboard title="Recommended" aside={aside}>
         <div className={styles.mainPanel}>
           <div className={styles.mainHeader}>

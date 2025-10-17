@@ -18,9 +18,6 @@ export default function Header() {
     user?.name || user?.username || user?.email?.split("@")[0] || "Account";
   const initials = (displayName?.[0] || "A").toUpperCase();
 
-  // Home için hangi route’u kullanacağınız:
-  // Eğer uygulamanın ana sayfası / ise HOME_PATH = "/"
-  // Recommended sayfasını ana sayfa kullanıyorsanız HOME_PATH = "/recommended"
   const HOME_PATH = "/recommended"; // gerekirse "/" yapın
 
   const handleLogout = async () => {
@@ -29,7 +26,8 @@ export default function Header() {
       await logoutApi();
       toast.success("Çıkış yapıldı");
     } catch (err) {
-      const msg = err?.normalizedMessage || err?.message || "Çıkış sırasında hata oluştu";
+      const msg =
+        err?.normalizedMessage || err?.message || "Çıkış sırasında hata oluştu";
       toast.error(msg);
     } finally {
       dispatch(clearAuth());
@@ -67,7 +65,7 @@ export default function Header() {
     <div className={styles.bar}>
       <div className={styles.inner}>
         <div className={styles.logo}>READ JOURNEY</div>
- <div className={styles.spacer} />
+        <div className={styles.spacer} />
         {/* Orta navigasyon */}
         <nav className={styles.nav} aria-label="User navigation">
           <NavLink to={HOME_PATH} className={navLinkClass}>
@@ -82,7 +80,9 @@ export default function Header() {
 
         {/* Kullanıcı barı */}
         <div className={styles.userBar} aria-label="User bar">
-          <div className={styles.avatar} aria-hidden="true">{initials}</div>
+          <div className={styles.avatar} aria-hidden="true">
+            {initials}
+          </div>
           <span>{displayName}</span>
           <button
             type="button"
@@ -129,16 +129,26 @@ export default function Header() {
             </div>
 
             <nav className={styles.menuNav} aria-label="Mobile user navigation">
-              <NavLink to={HOME_PATH} className={navLinkClass} onClick={closeMenu}>
+              <NavLink
+                to={HOME_PATH}
+                className={navLinkClass}
+                onClick={closeMenu}
+              >
                 Home
               </NavLink>
-              <NavLink to="/library" className={navLinkClass} onClick={closeMenu}>
+              <NavLink
+                to="/library"
+                className={navLinkClass}
+                onClick={closeMenu}
+              >
                 My library
               </NavLink>
             </nav>
 
             <div className={styles.menuUser}>
-              <div className={styles.avatar} aria-hidden="true">{initials}</div>
+              <div className={styles.avatar} aria-hidden="true">
+                {initials}
+              </div>
               <div style={{ flex: 1 }}>{displayName}</div>
             </div>
 

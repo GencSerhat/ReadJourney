@@ -1,4 +1,3 @@
-/* ====== Top bar ====== */
 .bar {
   position: sticky;
   top: 0;
@@ -23,7 +22,6 @@
   box-sizing: border-box;
 }
 
-/* ====== Sol logo ====== */
 .logo {
   display: flex;
   align-items: center;
@@ -39,17 +37,15 @@
   line-height: 1;
 }
 
-/* Orta alanı serbest bırakmak için */
 .spacer {
   flex: 1;
 }
 
-/* ====== Orta navigasyon ====== */
 .nav {
   display: none;
   align-items: center;
   gap: 24px;
-  margin-inline: auto; /* ortada dursun */
+  margin-inline: auto;
 }
 @media (min-width: 768px) {
   .nav {
@@ -62,7 +58,7 @@
   display: inline-block;
   padding: 8px 2px;
   text-decoration: none;
-  color: #9ca3af; /* slate-400 */
+  color: #9ca3af;
   font-weight: 600;
   font-size: 14px;
   transition: color 0.15s ease;
@@ -86,7 +82,6 @@
   border-radius: 2px;
 }
 
-/* ====== Sağ kullanıcı bölümü ====== */
 .userBar {
   display: none;
   align-items: center;
@@ -134,7 +129,6 @@
   border-color: rgba(255, 255, 255, 0.24);
 }
 
-/* ====== Burger (mobile) ====== */
 .burger {
   margin-left: auto;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -151,7 +145,6 @@
   }
 }
 
-/* ====== Mobile overlay & sheet ====== */
 .overlay {
   position: fixed;
   inset: 0;

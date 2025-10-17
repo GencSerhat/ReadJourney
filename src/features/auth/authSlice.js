@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: null,        // {name, email, ...}
-  token: null,       // string
-  status: "idle",    // "idle" | "loading" | "succeeded" | "failed"
-  error: null,       // string | null
+  user: null,
+  token: null,
+  status: "idle",
+  error: null,
 };
 
 const authSlice = createSlice({

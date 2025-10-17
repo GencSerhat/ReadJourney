@@ -5,7 +5,7 @@ export default function PublicLayout() {
   return (
     <div className={styles.wrapper}>
       <main className={styles.container}>
-        {/* Public sayfalar buraya yerleşecek */}
+       
         <Outlet />
       </main>
       <footer className={styles.footer}>Read Journey - Public Area</footer>

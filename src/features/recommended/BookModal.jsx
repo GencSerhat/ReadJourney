@@ -24,7 +24,7 @@ export default function BookModal({ open, onClose, book }) {
     } catch (err) {
 
     const message = err?.normalizedMessage || err?.message || "Add to library failed";
-    // Zaten ekliyse hata yerine bilgi ver ve modalı kapa
+
     const isDuplicate =
       err?.status === 409 || /already/i.test(String(message));
      if (isDuplicate) {
@@ -37,7 +37,7 @@ export default function BookModal({ open, onClose, book }) {
       setIsAdding(false);
     }
   };
-  // modal renderlandığında cache'e yaz
+
   rememberCover({
    id: book?.id,
    title: book?.title,

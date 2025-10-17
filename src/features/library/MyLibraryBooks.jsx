@@ -3,12 +3,7 @@ import { useState } from "react";
 import CoverImage from "../../components/CoverImage/CoverImage";
 import BookDetailModal from "./BookDetailModal.jsx";
 
-/**
- * props:
- * - items
- * - onFilterChange?(status)
- * - onRemove?(bookId)
- */
+
 export default function MyLibraryBooks({
   items = [],
   onFilterChange,

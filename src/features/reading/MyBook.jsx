@@ -15,7 +15,7 @@ import { http } from "../../services/http";
 import { findCover } from "../../utils/coverCache";
 import toast from "react-hot-toast";
 import BookFinishedModal from "../../components/BookFinishedModal/BookFinishedModal.jsx";
-// Prop/response içindeki olası kapak alanları
+
 const pickRawCover = (b) =>
   b?.cover ||
   b?.image ||
@@ -40,7 +40,6 @@ export default function MyBook({ book }) {
     activeReadingId: null,
   });
 
-  // Sol panelde ikonla geçiş
   const [sideTab, setSideTab] = useState("diary"); // "diary" | "stats"
 
   // Başlık/kapak/yazar
@@ -50,7 +49,7 @@ export default function MyBook({ book }) {
     cover: "",
     totalPages: 0,
   });
-  // Görsel kaynağı (<img src>)
+
   const [imgUrl, setImgUrl] = useState("");
   const [triedBlob, setTriedBlob] = useState(false);
   const [showFinished, setShowFinished] = useState(false);
@@ -58,7 +57,6 @@ export default function MyBook({ book }) {
 
   const bookId = book?.bookId || book?.id;
 
-  /* ── META HYDRATE ───────────────────────────────────────────── */
   useEffect(() => {
     let ignore = false;
     async function hydrate() {
@@ -122,7 +120,6 @@ export default function MyBook({ book }) {
     };
   }, [bookId, book]);
 
-  /* ── COVER <img> SRC + BLOP FALLBACK ───────────────────────── */
   useEffect(() => {
     setImgUrl(meta.cover ? toAbsoluteUrl(meta.cover) : "");
     setTriedBlob(false);
@@ -161,32 +158,30 @@ export default function MyBook({ book }) {
     setImgUrl("");
   };
 
-  /* ── READING DETAILS ───────────────────────────────────────── */
- const load = async () => {
-  setLoading(true);
-  try {
-    const d = await fetchReadingDetails({ bookId });
-    setDetails(d);
-    setMode(d.activeReadingId ? "reading" : "idle");
+  const load = async () => {
+    setLoading(true);
+    try {
+      const d = await fetchReadingDetails({ bookId });
+      setDetails(d);
+      setMode(d.activeReadingId ? "reading" : "idle");
 
-    // ⬇️ tamamlanma yüzdesi izleme
-    const current = Number(d?.stats?.completion || 0);
-    const prev = Number(prevCompletionRef.current || 0);
-    if (prev < 100 && current >= 100) {
-      setShowFinished(true);        // pop-up
+      // ⬇️ tamamlanma yüzdesi izleme
+      const current = Number(d?.stats?.completion || 0);
+      const prev = Number(prevCompletionRef.current || 0);
+      if (prev < 100 && current >= 100) {
+        setShowFinished(true); // pop-up
+      }
+      prevCompletionRef.current = current;
+    } finally {
+      setLoading(false);
     }
-    prevCompletionRef.current = current;
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   useEffect(() => {
     if (bookId) load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookId]);
 
-  /* ── FORM: START/STOP ───────────────────────────────────────── */
   const {
     register,
     handleSubmit,
@@ -251,7 +246,6 @@ export default function MyBook({ book }) {
     }
   };
 
-  /* ── Hız sparkline ölçeği ─────────────────────────────────── */
   const maxSpeed = useMemo(() => {
     return (details.diary || []).reduce((acc, d) => {
       const s =
@@ -262,7 +256,6 @@ export default function MyBook({ book }) {
 
   const buttonLabel = mode === "idle" ? "To start" : "To stop";
 
-  /* ── RENDER ───────────────────────────────────────────────── */
   return (
     <div className={styles.layout}>
       {/* SOL PANEL */}
@@ -502,7 +495,7 @@ export default function MyBook({ book }) {
               className={styles.cover}
               loading="lazy"
               draggable={false}
-              onError={tryFetchBlob} // korumalı dosyalarda blob fallback
+              onError={tryFetchBlob}
             />
           ) : (
             <div className={styles.cover} />
@@ -523,7 +516,10 @@ export default function MyBook({ book }) {
           <span className={styles.recordDot} />
         </button>
       </main>
-      <BookFinishedModal open={showFinished} onClose={() => setShowFinished(false)} />
+      <BookFinishedModal
+        open={showFinished}
+        onClose={() => setShowFinished(false)}
+      />
     </div>
   );
 }

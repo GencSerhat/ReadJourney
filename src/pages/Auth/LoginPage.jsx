@@ -39,7 +39,7 @@ export default function LoginPage() {
         null;
       if (!token) throw new Error("Login response missing token");
 
-      // 2) user yakala (yoksa /users/current)
+      //  user yakala (yoksa /users/current)
       let user =
         data?.user ??
         data?.userData ??
@@ -52,13 +52,13 @@ export default function LoginPage() {
           const me = await getCurrentUserApi();
           user = me?.user ?? me?.data ?? me ?? null;
         } catch {
-          /* ignore — fallback aşağıda */
+         
         }
       }
 
       if (!user) user = { email: values.email, name: values.email.split("@")[0] };
 
-      // 3) store + yönlendir
+      //  store + yönlendir
       dispatch(setCredentials({ user, token }));
       toast.success("Giriş başarılı!");
       const redirectTo = location.state?.from?.pathname || "/recommended";
@@ -72,7 +72,7 @@ export default function LoginPage() {
   return (
     <div className={styles.shell}>
       <div className={styles.container}>
-        {/* Sol panel: başlık + form */}
+      
         <section className={styles.left}>
           <div className={styles.logo}>READ JOURNEY</div>
 
@@ -135,9 +135,9 @@ export default function LoginPage() {
           </form>
         </section>
 
-        {/* Sağ panel: telefon görseli */}
+       
         <section className={styles.right} aria-hidden="true">
-          {/* public/images/iphoneBlack.png (veya import yöntemi) */}
+        
           <img
             className={styles.rightImg}
             src="/images/iPhoneBlack.png"

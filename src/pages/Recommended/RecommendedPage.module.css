@@ -1,8 +1,8 @@
-/* Tüm sayfa koyu zemin */
+
 .screen {
-  min-height: 100dvh; /* mobilde güvenli yükseklik */
-  background: #0f1115; /* sayfa arkası: tam koyu */
-  padding: 20px; /* ekran görüntüsündeki dış boşluk */
+  min-height: 100dvh; 
+  background: #0f1115;
+  padding: 20px; 
   box-sizing: border-box;
 }
 /* SOL PANEL (ASIDE) */
@@ -159,7 +159,7 @@
   margin-bottom: 10px;
 }
 
-/* Kullanmayı sürdürdüğünüz eski sınıflar için uyumluluk (gerekirse) */
+
 .asideText {
   color: #9aa3b2;
   font-size: 14px;
@@ -168,10 +168,10 @@
   color: #e5e7eb;
   text-decoration: none;
 }
-/* Recommended ekranında Dashboard dış kaplarını transparan yap */
+
 .screen
   :where(.shell, .page, .container, .grid, .paper, .asideWrap, .mainWrap) {
   background: transparent !important;
   box-shadow: none !important;
-  border: none; /* varsa beyaz çerçeveyi kapat */
+  border: none; 
 }

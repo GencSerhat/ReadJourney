@@ -1,8 +1,4 @@
-/* .shell {
-  width: min(1200px, 92%);
-  margin-inline: auto;
-  padding-block: 24px;
-} */
+
 
 .titleRow {
   display: flex;
@@ -53,7 +49,7 @@
   font-size: 14px;
 }
 
-/* Kabuğun kendisi */
+
 .shell,
 .page,
 .container,
@@ -61,11 +57,10 @@
 .paper {
   background: transparent !important;
   box-shadow: none !important;
-  /* Eğer beyaz border varsa kapat: */
+
   border-color: rgba(255, 255, 255, 0.06) !important;
 }
 
-/* Sol kolon (aside) ve içerik kolonunun DIŞ kapları */
 .asideWrap,
 .mainWrap {
   background: transparent !important;

@@ -1,10 +1,10 @@
-/* Sol panelde dikey yığın */
+
 .asideStack {
   display: grid;
   gap: 16px;
 }
 
-/* Kart görünümü: koyu zemin + hafif border, screenshot benzeri */
+
 .card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -55,7 +55,7 @@
   font-size: 12px;
 }
 
-/* Right content alanında üst üste boşluklar için (gerekirse) */
+
 .stack {
   display: grid;
   gap: 16px;
@@ -66,7 +66,7 @@
   margin-bottom: 8px;
 }
 
-/* Recommended kutusu için küçük kapak placeholder’ları */
+
 .recoGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -89,7 +89,7 @@
   font-size: 14px;
 }
 
-/* Koyu tema ile uyum */
+
 :where(.card, .input, .btn) {
   backdrop-filter: blur(2px);
 }

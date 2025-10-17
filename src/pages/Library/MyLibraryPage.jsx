@@ -27,7 +27,7 @@ export default function MyLibraryPage() {
     navigate(`/reading/${id}`);
   };
 
-  // RHF
+  
   const {
     register,
     handleSubmit,
@@ -61,7 +61,7 @@ export default function MyLibraryPage() {
 
   useEffect(() => {
     load(status);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   }, [status]);
 
   // Add
@@ -150,11 +150,11 @@ export default function MyLibraryPage() {
         </form>
       </section>
 
-      {/* Recommended books (placeholder kutu – elindeki componenti burada kullanabilirsin) */}
+ 
       <section className={styles.card}>
         <h3 className={styles.cardTitle}>Recommended books</h3>
         <div className={styles.recoGrid}>
-          {/* Buraya küçük kapak kartları gelecektir. İstersen bir component bağla. */}
+      
           <div className={styles.recoSkeleton} />
           <div className={styles.recoSkeleton} />
           <div className={styles.recoSkeleton} />
@@ -169,7 +169,7 @@ export default function MyLibraryPage() {
 
   return (
     <Dashboard title="My library" aside={aside}>
-      {/* SAĞ TARAF: liste ve filtreler */}
+
       <MyLibraryBooks
         items={loading ? [] : items}
         onFilterChange={setStatus}
@@ -177,7 +177,7 @@ export default function MyLibraryPage() {
         onStartReading={onStartReading}
       />
 
-      {/* Başarı pop-up (Modal) */}
+ 
       <Modal open={showSuccess} onClose={() => setShowSuccess(false)} title="">
         <div style={{ textAlign: "center", padding: "8px 6px" }}>
           <div style={{ fontSize: 32, marginBottom: 8 }}>👍</div>

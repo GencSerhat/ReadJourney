@@ -1,10 +1,7 @@
 import { http } from "./http";
 import { toAbsoluteUrl } from "../utils/url";
 import { findCover } from "../utils/coverCache";
-/* =========================
-   ADD from Recommended (modal)
-   POST /books/add  -> { title, author, totalPages }
-   ========================= */
+
 export async function addToLibraryApi(book) {
   if (!book) throw new Error("Missing book object");
 
@@ -37,10 +34,7 @@ export async function addToLibraryApi(book) {
   }
 }
 
-/* =========================
-   ADD from My Library form
-   POST /books/add -> { title, author, totalPages }
-   ========================= */
+
 export async function addOwnBookApi({ title, author, totalPages }) {
   const payload = {
     title: title?.trim(),
@@ -51,12 +45,7 @@ export async function addOwnBookApi({ title, author, totalPages }) {
   return data;
 }
 
-/* =========================
-   LIST My Library
-   GET /books/own
-   Normalize items (id/title/author/cover/status)
-   ========================= */
-/* LIST sabit kalsın */
+
 export async function fetchLibraryList(status = "") {
   const params = {};
   if (status) params.status = status;
@@ -79,7 +68,7 @@ export async function fetchLibraryList(status = "") {
     };
     return item;
   });
-   // Kapaksızları cache’ten zenginleştir
+
   for (const it of normalized) {
     if (!it.cover) {
       const cached = findCover({ id: it.bookId, title: it.title, author: it.author });
@@ -89,14 +78,10 @@ export async function fetchLibraryList(status = "") {
  return normalized;
 }
 
-/* =========================
-   REMOVE from My Library
-   Try common endpoints; prefer DELETE /books/own/:id
-   ========================= */
-/* REMOVE — tüm ID ve uç/kombinasyonları sırayla dener */
+
 export async function removeLibraryBook(item) {
   if (!item) throw new Error("Missing item");
-  // own kayıt id'si (listede 'id' ve/veya 'ownId' olarak geliyor)
+
   const ownId = item.ownId ?? item.id ?? item._raw?.id ?? item._raw?._id;
   if (!ownId) throw new Error("Missing ownId (library record id)");
 

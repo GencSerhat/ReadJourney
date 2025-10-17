@@ -3,16 +3,34 @@
   padding: 18px 14px 10px;
   max-width: 420px;
 }
-.emoji { font-size: 46px; margin-bottom: 10px; }
+.emoji {
+  font-size: 46px;
+  margin-bottom: 10px;
+}
 .title {
-  font-size: 18px; font-weight: 800;
-  margin-bottom: 8px; color: #e5e7eb;
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #e5e7eb;
 }
-.text { color: #cbd5e1; line-height: 1.5; }
-.text b { color: #ffffff; font-weight: 800; }
+.text {
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+.text b {
+  color: #ffffff;
+  font-weight: 800;
+}
 .btn {
-  margin-top: 14px; border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.04); color: #e5e7eb;
-  font-weight: 700; padding: 10px 14px; border-radius: 10px; cursor: pointer;
+  margin-top: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #e5e7eb;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
 }
-.btn:hover { background: rgba(255,255,255,0.08); }
+.btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}

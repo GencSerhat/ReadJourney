@@ -173,7 +173,7 @@ export default function RegisterPage() {
           </form>
         </section>
 
-        {/* Sağ taraf placeholder — isteğe bağlı görsel alan */}
+       
         <section className={styles.right} aria-hidden="true">
           <img
             className={styles.rightImg}

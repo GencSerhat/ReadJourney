@@ -1,7 +1,6 @@
 import { http } from "./http";
 
-// —— START / FINISH ————————————————————————
-// POST /books/reading/start   body: { id: <bookId>, page }
+// —— START / FINISH —
 export async function startReadingApi({ bookId, page }) {
   if (!bookId) throw new Error("Missing bookId");
   const { data } = await http.post("/books/reading/start", {
@@ -21,7 +20,7 @@ export async function stopReadingApi({ bookId, page }) {
   return data;
 }
 
-// —— DETAILS ———————————————————————————————
+// —— DETAILS 
 // GET /books/{id}  → kitap + progress[]
 export async function fetchReadingDetails({ bookId }) {
   if (!bookId) return { diary: [], stats: {} };
@@ -29,8 +28,8 @@ export async function fetchReadingDetails({ bookId }) {
   return normalizeBookDetails(data);
 }
 
-// —— DIARY DELETE ————————————————————————————
-// DELETE /books/reading?bookId=<bookId>&readingId=<entryId>
+// —— DIARY DELETE —
+
 export async function deleteDiaryEntry({ bookId, entryId }) {
   if (!bookId || !entryId) throw new Error("Missing bookId/entryId");
   const { data } = await http.delete("/books/reading", {
@@ -39,12 +38,12 @@ export async function deleteDiaryEntry({ bookId, entryId }) {
   return data;
 }
 
-// —— Normalizasyon: Swagger örneğine göre ——————————
+
 function normalizeBookDetails(raw) {
   const totalPages = Number(raw?.totalPages ?? 0) || 0;
   const progress = Array.isArray(raw?.progress) ? raw.progress : [];
 
-  // Oturum listesi (aktif/pasif bilgisiyle)
+
   const sessions = progress.map((p, i) => {
     const pages = Number(p?.readPages ?? 0) || 0;
     const status = p?.status || (p?.endReading ? "inactive" : "active");

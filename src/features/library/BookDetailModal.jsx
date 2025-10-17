@@ -30,9 +30,6 @@ export default function BookDetailModal({ open, onClose, book, onStart }) {
         >
           Start reading
         </button>
-
-        {/* İstersen göster; ekran görüntüsünde yok */}
-        {/* <button type="button" className={styles.secondary} onClick={onClose}>Close</button> */}
       </div>
     </Modal>
   );
